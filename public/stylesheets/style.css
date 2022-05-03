@@ -1,0 +1,26 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+} */
+
+a {
+  color: #00B7FF;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0;
+}
+
+.icon-button {
+  display: inline;
+}
+
+.icon-link {
+  text-decoration: none;
+}

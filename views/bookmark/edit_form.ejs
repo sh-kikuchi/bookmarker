@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bookmarkers</title>
+  <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+  </link>
+</head>
+<body>
+  <%- include("../_share/nav.ejs") %>
+    <div class="container">
+      <div class="row">
+        <div class="col-8">
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">ブックマーク編集</h1>
+              <p class="lead">リンクやコメント、カテゴリー設定などが編集出来ます</p>
+            </div>
+          </div>
+          <form action="/edit/<%= editData.id %>" method="POST">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">URL</label>
+              <input type="url" class="form-control" id="url" name="url" value="<%= editData.url %>">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">URLのタイトル</label>
+              <input type="text" class="form-control" id="url_title" name="url_title" value="<%= editData.title %>">
+            </div>
+            <!-- カテゴリー -->
+            <label>カテゴリー</label>
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-new-category-tab" data-bs-toggle="tab" data-bs-target="#nav-new-category" type="button" role="tab" aria-controls="nav-new-category" aria-selected="true">
+                  新規カテゴリー作成
+                </button>
+                <button class="nav-link" id="nav-old-category-tab" data-bs-toggle="tab" data-bs-target="#nav-old-category" type="button" role="tab" aria-controls="nav-old-category" aria-selected="false">
+                  既存カテゴリー選択
+                </button>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-new-category" role="tabpanel" aria-labelledby="nav-new-category-tab">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="reg_category" placeholder="カテゴリー登録" name="reg_category">
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-old-category" role="tabpanel" aria-labelledby="nav-old-category-tab">
+                <select class="form-control" id="select_category" name="select_category">
+                  <option>
+                    <%= editData.name %>
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">メモ</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text_memo" value="<%= editData.category %>"></textarea>
+            </div>
+            <div class="d-flex mt-3">
+              <button type="submit" class="btn btn-primary">登録</button>
+              <a href="/" class="btn btn-secondary ms-3">戻る</a>
+            </div>
+          </form>
+        </div>
+        <!-- <div class="col-4">
+        //sidebar
+      </div> -->
+      </div>
+    </div>
+    <%- include("../_share/footer.ejs") %>
+      <script src="/static/Javascripts/script.js"></script>
+      <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/static/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
