@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 const { pool } = require('./database/pool');
 const bcrypt = require('bcrypt');
 const passport = require("passport");
@@ -13,7 +13,7 @@ const logger = require('morgan');
 var app = express();
 
 
-const initializePassport = require("./passportConfig");
+const initializePassport = require("./config/passportConfig");
 
 initializePassport(passport);
 
@@ -76,7 +76,7 @@ app.get('/', checkNotAuthenticated, async function (req, res) {
 });
 
 //検索
-app.post('/search/:category', async function (req, res) {
+app.post('/search/:category', checkNotAuthenticated, async function (req, res) {
   const userid = req.user.id;
   const category = req.params.category;
   Promise.all([
@@ -141,7 +141,7 @@ app.get("/users/logout", (req, res) => {
   res.render("login", { message: "You have logged out successfully" });
 });
 
-app.post("/users/register", async (req, res) => {
+app.post("/users/register", checkNotAuthenticated, async (req, res) => {
   let { name, email, password, password2 } = req.body;
   let errors = [];
 
@@ -203,7 +203,7 @@ app.post("/users/register", async (req, res) => {
  * @module user/edit
  * @params userid, req.body(name,email,current_password,new_password)
  */
-app.post("/user/edit/:id", async (req, res) => {
+app.post("/user/edit/:id", checkNotAuthenticated, async (req, res) => {
   const TAG = "[user/edit/:id]";
   //リスエストデータ
   const userid = req.params.id;

@@ -36,6 +36,12 @@ router.post("/register", async (req, res) => {
   if (!url || !url_title) {
     errors.push({ message: "URLとタイトルは必須項目です" });
   }
+
+  //仮
+  if (select_category === undefined) {
+    select_category = ""
+  }
+
   //カテゴリー
   if (select_category == "" && reg_category == "") {
     category_id = "0";
@@ -106,6 +112,11 @@ router.post("/edit/:id", async (req, res) => {
    */
   if (!url || !url_title) {
     errors.push({ message: "URLとタイトルは必須項目です" });
+  }
+
+  //仮
+  if (select_category === undefined) {
+    select_category = ""
   }
 
   if (select_category == "" && reg_category == "") {

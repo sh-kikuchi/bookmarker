@@ -36,10 +36,10 @@
                 <%=item.name%>
               </div>
               <div>
-                <form action="/search/<%= item.name %>" method="POST" class="icon-button ">
+                <form action="/search/<%= item.name %>" method="POST" class="icon-button " data-bs-toggle="tooltip" data-bs-placement="top" title="検索">
                   <button type="submit" class=" text-secondary ms-3 "><i class="bi-search"></i></button>
                 </form>
-                <form action="/category/delete/<%= item.id %>" method="POST" class="icon-button ">
+                <form action="/category/delete/<%= item.id %>" method="POST" class="icon-button" data-bs-toggle="tooltip" data-bs-placement="top" title="削除">
                   <button type="submit" class=" text-secondary ms-3 "><i class="bi-trash"></i></button>
                 </form>
 

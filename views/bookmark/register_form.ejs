@@ -32,14 +32,14 @@
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="category" value="0" onchange="getCategoryRadio()">
                 <label class="form-check-label">既存選択</label>
-                <select class="form-control" id="select_category" name="select_category">
+                <select class="form-control" id="select_category" name="select_category" disabled>
                   <option></option>
                 </select>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="category" value="1" onchange="getCategoryRadio()">
                 <label class="form-check-label">新規登録</label>
-                <input type="text" class="form-control" id="reg_category" placeholder="カテゴリー登録" name="reg_category">
+                <input type="text" class="form-control" id="reg_category" placeholder="カテゴリー登録" name="reg_category" disabled>
               </div>
             </div>
             <div class="form-group">
@@ -47,7 +47,7 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text_memo"></textarea>
             </div>
             <div class="d-flex mt-3">
-              <button type="submit" class="btn btn-secondary">登録</button>
+              <button type="submit" class="btn btn-success">登録</button>
               <a href="/" class="btn btn-secondary ms-3">戻る</a>
             </div>
           </form>
