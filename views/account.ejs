@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bookmarkers</title>
+  <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+  </link>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">アカウント設定</h1>
+            <p class="lead">ユーザー設定の変更が出来ます</p>
+          </div>
+        </div>
+        <ul>
+          <% if (typeof errors !='undefined' ) { %>
+            <% errors.forEach(error=> { %>
+              <li>
+                <%= error.message %>
+              </li>
+              <% }) %>
+                <% } %>
+        </ul>
+        <form action="/user/edit/<%= userid %>" method="POST">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">ユーザー名</label>
+            <input type="text" class="form-control" id="name" name="name" value="<%= name %>">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Eメールアドレス</label>
+            <input type="text" class="form-control" id="email" name="email" value="<%= email %>">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">現在のパスワード</label>
+            <input type="password" class="form-control" id="current_password" name="current_password">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">パスワード変更</label>
+            <input type="password" class="form-control" id="new_password" name="new_password">
+          </div>
+          <div class="d-flex mt-3">
+            <button type="submit" class="btn btn-success">登録</button>
+            <div><a href="/" class="btn btn-secondary ms-3">戻る</a></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <%- include("./_share/footer.ejs") %>
+</body>
+</html>

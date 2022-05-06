@@ -1,0 +1,53 @@
+<div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="/static/images/fuhin.png" width="100" height="100">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= name %></h5>
+              <p>ブックマーク件数: <%= count %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item"><a href="../bookmark/register" class="text-secondary">新規ブックマーク作成</a></li>
+    <li class="list-group-item"><a href="../users/account" class="text-secondary">アカウント設定</a></li>
+    <li class="list-group-item"><a href="../about" class="text-secondary">本サイトについて</a></li>
+  </ul>
+</div>
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        カテゴリー一覧
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <ul class="list-group list-group-flush">
+          <% for (var item of categories) { %>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <%=item.name%>
+              </div>
+              <div>
+                <form action="/search/<%= item.name %>" method="POST" class="icon-button " data-bs-toggle="tooltip" data-bs-placement="top" title="検索">
+                  <button type="submit" class=" text-secondary ms-3 "><i class="bi-search"></i></button>
+                </form>
+                <form action="/category/delete/<%= item.id %>" method="POST" class="icon-button" data-bs-toggle="tooltip" data-bs-placement="top" title="削除">
+                  <button type="submit" class=" text-secondary ms-3 "><i class="bi-trash"></i></button>
+                </form>
+
+              </div>
+            </li>
+            <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

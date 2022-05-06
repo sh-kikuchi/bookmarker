@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bookmarkers</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+  </link>
+</head>
+<body>
+  <%- include("../_share/nav.ejs") %>
+    <div class="container">
+      <div class="row">
+        <div class="col-8">
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">ブックマーク登録</h1>
+              <p class="lead">リンクやコメント、カテゴリー設定などが出来ます</p>
+            </div>
+          </div>
+          <form action="register" method="POST">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">URL</label>
+              <input type="url" class="form-control" id="url" placeholder="https://panda.com" name="url">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">URLのタイトル</label>
+              <input type="text" class="form-control" id="url_title" placeholder="name@example.com" name="url_title">
+            </div>
+            <!-- カテゴリー -->
+            <label>カテゴリー</label>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="category" value="0" onchange="getCategoryRadio()">
+                <label class="form-check-label">既存選択</label>
+                <select class="form-control" id="select_category" name="select_category" disabled>
+                  <option></option>
+                </select>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="category" value="1" onchange="getCategoryRadio()">
+                <label class="form-check-label">新規登録</label>
+                <input type="text" class="form-control" id="reg_category" placeholder="カテゴリー登録" name="reg_category" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">メモ</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text_memo"></textarea>
+            </div>
+            <div class="d-flex mt-3">
+              <button type="submit" class="btn btn-success">登録</button>
+              <a href="/" class="btn btn-secondary ms-3">戻る</a>
+            </div>
+          </form>
+        </div>
+        <!-- <div class="col-4">
+        //sidebar
+      </div> -->
+      </div>
+    </div>
+    <%- include("../_share/footer.ejs") %>
+      <script src="/static/Javascripts/script.js"></script>
+      <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/static/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="/static/bootstrap/dist/js/bootstrap.esm.min.js"></script>
+</body>
+</html>
