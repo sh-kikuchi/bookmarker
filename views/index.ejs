@@ -27,7 +27,7 @@
                 <div class="d-flex justify-content-between">
                   <h5 class="card-title"><%- item.title %></h5>
                   <div class="card-options">
-                    <a href=" <% item.url %>" class="card-link text-secondary icon-link ms-3 " data-bs-toggle="tooltip" data-bs-placement="top" title="外部リンク">
+                    <a href=" <%= item.url %>" class="card-link text-secondary icon-link ms-3 " data-bs-toggle="tooltip" data-bs-placement="top" title="外部リンク">
                       <i class="bi-link"></i>
                     </a>
                     <a href="/bookmark/edit/<%= item.id %>" class="card-link text-secondary icon-link ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="編集">
