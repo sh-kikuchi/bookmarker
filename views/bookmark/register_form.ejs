@@ -33,7 +33,11 @@
                 <input class="form-check-input" type="radio" name="category" value="0" onchange="getCategoryRadio()">
                 <label class="form-check-label">既存選択</label>
                 <select class="form-control" id="select_category" name="select_category" disabled>
-                  <option></option>
+                  <option value=""></option>
+                  <option value="<%= categoryData.id %>">
+                    <%= categoryData.name %>
+                  </option>
+
                 </select>
               </div>
               <div class="form-check form-check-inline">

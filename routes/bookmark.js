@@ -5,7 +5,21 @@ var router = express.Router();
 
 router.get('/register', function (req, res, next) {
   console.log("/register called");
-  res.render('bookmark/register_form.ejs');
+  let categoryData = [];
+  const userid = req.user.id;
+  pool.query(
+    `SELECT id,name FROM categories WHERE user_id = $1`,
+    [userid],
+    (err, results) => {
+      if (err) {
+        throw err;
+      }
+      categoryData = results.rows[0];
+      res.render('bookmark/register_form.ejs', {
+        categoryData: categoryData
+      });
+    }
+  );
 });
 
 
