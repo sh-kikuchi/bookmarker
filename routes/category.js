@@ -4,15 +4,9 @@ const { pool } = require('../database/pool');
 var router = express.Router();
 
 router.post('/delete/:id', (req, res) => {
-  Promise.all([
-    pool.query(`DELETE FROM categories WHERE id = $1`, [req.params.id]),
-    pool.query(`DELETE FROM bookmarks  WHERE category_id = $1`, [req.params.id])
-  ]
-  ).then((results) => {
-    res.redirect("/");
-  }).catch((error) => {
-    console.log(err);
-  });
+  console.log('/category/delete/:id is called');
+  const doDelete = require('../models/category/doDelete');
+  doDelete(req, res);
 });
 
 module.exports = router;

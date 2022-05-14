@@ -34,10 +34,11 @@
                 <label class="form-check-label">既存選択</label>
                 <select class="form-control" id="select_category" name="select_category" disabled>
                   <option value=""></option>
-                  <option value="<%= categoryData.id %>">
-                    <%= categoryData.name %>
-                  </option>
-
+                  <% for (var item of categoryData) { %>
+                    <option value="<%= item.id %>">
+                      <%= item.name %>
+                    </option>
+                    <% } %>
                 </select>
               </div>
               <div class="form-check form-check-inline">
