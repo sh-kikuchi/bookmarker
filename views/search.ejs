@@ -11,38 +11,47 @@
   <%- include("./_share/nav.ejs") %>
     <div class="container">
       <div class="row">
-        <div class="col-8">
+        <div class="col-md-8 col-sm-12">
           <div class="jumbotron jumbotron-fluid">
             <div class="container">
               <h1 class="display-4">bookmark</h1>
               <p class="lead">最近あなたが追加したブックマークの一覧です。サイドバーよりカテゴリー別のブックマークがご覧になれます。</p>
             </div>
           </div>
-          <% for (var item of bookmarks) { %>
-            <div class="card">
-              <div class="card-subtitle mb-2 text-muted mt-1 pl-3">
-                <%- item.url %>
-              </div>
-              <div class="card-body">
-                <div class="d-flex justify-content-between">
-                  <h5 class="card-title"><%- item.title %></h5>
-                  <div class="card-options">
-                    <a href=" <% item.url %>" class="card-link text-secondary icon-link ms-3 ">
-                      <i class="bi-link"></i>
-                    </a>
-                    <a href="/bookmark/edit/<%= item.id %>" class="card-link text-secondary icon-link ms-3">
-                      <i class="bi-pen"></i>
-                    </a>
-                    <form action="/bookmark/delete/<%= item.id %>" method="POST" class="icon-button ">
-                      <button type="submit" class=" text-secondary ms-3 "><i class="bi-trash"></i></button>
-                    </form>
+          <div class="contents">
+            <% for (var item of bookmarks) { %>
+              <div class="card">
+                <div class="card-subtitle mb-2 text-muted mt-1 pl-3">
+                  <%- item.url %>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="card-title"><%- item.title %></h5>
+                    <div class="card-options">
+                      <a href=" <% item.url %>" class="card-link text-secondary icon-link ms-3 ">
+                        <i class="bi-link"></i>
+                      </a>
+                      <a href="/bookmark/edit/<%= item.id %>" class="card-link text-secondary icon-link ms-3">
+                        <i class="bi-pen"></i>
+                      </a>
+                      <form action="/bookmark/delete/<%= item.id %>" method="POST" class="icon-button ">
+                        <button type="submit" class=" text-secondary ms-3 "><i class="bi-trash"></i></button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <% } %>
+              <% } %>
+          </div>
+          <!-- ページネーション -->
+          <div class="pagination">
+            <p class="total_counter"></p>
+            <p class="prev">前へ</p>
+            <ul class="page_counter"></ul>
+            <p class="next">次へ</p>
+          </div>
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-sm-12 mt-4">
           <%- include("./_share/sidebar.ejs") %>
         </div>
       </div>

@@ -4,8 +4,8 @@
  * 対象：bookmark/edit_form,bookmark/register_form
  * checkValue: 0=既存、1=新規
  */
-const select_category = document.getElementById('select_category');
-const reg_category = document.getElementById('reg_category');
+const input_select_category = document.getElementById('select_category');
+const input_reg_category = document.getElementById('reg_category');
 let category = document.getElementsByName('category');
 let checkValue = '';
 
@@ -14,13 +14,13 @@ function getCategoryRadio() {
     if (category.item(i).checked) {
       checkValue = category.item(i).value;
       if (checkValue == "0") {
-        select_category.disabled = false
-        reg_category.disabled = true;
-        reg_category.value = "";
+        input_select_category.disabled = false
+        input_reg_category.disabled = true;
+        input_reg_category.value = "";
       } else {
-        select_category.disabled = true
-        reg_category.disabled = false;
-        select_category.value = "";
+        input_select_category.disabled = true
+        input_reg_category.disabled = false;
+        input_select_category.value = "";
       }
     }
   }
