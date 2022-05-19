@@ -1,21 +1,12 @@
 require('dotenv').config();
 const { pool } = require('../../database/pool');
 const TAG = "[models/bookmark/doEdit.js]";
+let dayjs = require('dayjs'); // 追加
 
 module.exports = (async (req, res) => {
   const user_id = req.user.id;
 
   let { url, url_title, select_category, reg_category, text_memo } = req.body;
-  // if (req.body.category == "0") {
-  //   let { url, url_title, category, select_category, text_memo } = req.body;
-  //   console.log(req.body);
-  // } else {
-  //   let { url, url_title, category, reg_category, text_memo } = req.body;
-  //   console.log(req.body);
-  // }
-
-  // { url: 'https://sh-revue.net/', url_title: 're:vue', category: '0', select_category: '26', text_memo: '' }
-  // { url: 'https://sh-revue.net/', url_title: 're:vue', category: '1', reg_category: 'test345', text_memo: '' }
 
   console.log(req.body.category);
 
@@ -32,7 +23,7 @@ module.exports = (async (req, res) => {
   }
 
 
-  /**
+  /**s
    * バリデーション
    */
   //URL
@@ -65,19 +56,39 @@ module.exports = (async (req, res) => {
   } else {
     //新規カテゴリーの場合:カテゴリID発行
     if (reg_category != "") {
+      let created_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
+      let updated_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
       pool.query(
-        `INSERT INTO categories (user_id, name)
-                VALUES ($1, $2)
-                RETURNING id`,
+        // `INSERT INTO categories (user_id, name,created_at,updated_at)
+        //         VALUES ($1, $2, $3, $4)
+        //         RETURNING id`,
+        // [user_id, new_category, created_at, updated_at],
+        `SELECT name FROM categories WHERE user_id = $1 AND name = $2`,
         [user_id, new_category],
         (err, results) => {
           if (err) {
             console.log(err);
           } else {
-            //新規カテゴリーID
-            category_id = results.rows[0].id; //数値
-            console.log(category_id);
-            doEdit();
+            if (results.rows.length == 0) {
+              pool.query(
+                `INSERT INTO categories (user_id, name,created_at,updated_at)
+                VALUES ($1, $2, $3, $4)
+                RETURNING id`,
+                [user_id, new_category, created_at, updated_at],
+                (err, results) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    //新規カテゴリーID
+                    category_id = results.rows[0].id; //数値
+                    console.log(category_id);
+                    doEdit();
+                  }
+                }
+              )
+            } else {
+              res.redirect('/');
+            }
           }
         }
       )
@@ -86,10 +97,10 @@ module.exports = (async (req, res) => {
     }
 
     function doEdit() {
+      let updated_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
       pool.query(
-        `UPDATE bookmarks SET category_id = $1, title = $2, url = $3, text = $4
-      WHERE id = $5`,
-        [category_id, url_title, url, text_memo, req.params.id],
+        `UPDATE bookmarks SET category_id = $1, title = $2, url = $3, text = $4, updated_at = $5 WHERE id = $6`,
+        [category_id, url_title, url, text_memo, updated_at, req.params.id],
         (err, results) => {
           if (err) {
             throw err;
