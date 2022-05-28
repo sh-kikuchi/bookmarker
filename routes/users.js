@@ -3,6 +3,7 @@ const express = require('express');
 const passport = require("passport");
 var router = express.Router();
 
+
 //新規登録画面
 router.get("/register", (req, res) => {
   res.render("users/register.ejs");
@@ -10,8 +11,8 @@ router.get("/register", (req, res) => {
 
 //ログイン画面
 router.get("/login", (req, res) => {
+  //console.log(req.session.flash.error);
   console.log("/users/login called")
-  console.log(req.session.flash.error);
   res.render("users/login");
 });
 
@@ -49,7 +50,7 @@ router.post("/edit/:id", (req, res) => {
 //ログアウト機能
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect('/users/login');
+  res.render("users/login");
 });
 
 module.exports = router;

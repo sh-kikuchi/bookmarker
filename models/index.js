@@ -20,5 +20,4 @@ module.exports = (async (req, res) => {
     console.log(error)
     res.render("user/login");
   });
-
 });

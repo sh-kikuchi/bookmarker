@@ -11,9 +11,16 @@
         <li class="nav-item"><a href="../bookmark/register" class="nav-link text-secondary">新規ブックマーク作成</a></li>
         <li class="nav-item"><a href="../users/account" class="nav-link text-secondary">アカウント設定</a></li>
         <li class="nav-item"><a href="../about" class="nav-link text-secondary">本サイトについて</a></li>
-        <li class="nav-item"><a href="users/logout" class="nav-link text-secondary">ログアウト</a></li>
+        <li class="nav-item">
+          <form action="/users/logout/" method="GET">
+            <div class="form-group">
+              <input type="url" class="nav-link text-secondary" id="url" value="ログアウト">
+            </div>
+          </form>
+          <!-- <a href="//users/logout" class="nav-link text-secondary">ログアウト</a> -->
+        </li>
       </ul>
     </div>
   </div>
-  <a class="btn btn-outline-success my-2 my-sm-0 mr-2 d-none d-md-block" style="position: absolute; right:5px" href="users/logout">ログアウト</a>
+  <a class="btn btn-outline-success my-2 my-sm-0 mr-2 d-none d-md-block" style="position: absolute; right:5px" href="/users/logout/">ログアウト</a>
 </nav>

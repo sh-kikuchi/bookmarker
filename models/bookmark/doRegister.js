@@ -1,9 +1,10 @@
 require('dotenv').config();
 const { pool } = require('../../database/pool');
 const TAG = "[models/bookmark/doRegister.js]";
+let dayjs = require('dayjs'); // 追加
 
 module.exports = (async (req, res) => {
-  const userid = req.user.id
+  const user_id = req.user.id
   let { url, url_title, select_category, reg_category, text_memo } = req.body;
   let category_id = "";
   let new_category = "";
@@ -40,18 +41,35 @@ module.exports = (async (req, res) => {
   } else {
     //新規カテゴリーの場合:カテゴリID発行
     if (reg_category != "") {
+      let created_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
+      let updated_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
       pool.query(
-        `INSERT INTO categories (user_id, name)
-                VALUES ($1, $2)
-                RETURNING id`,
-        [userid, new_category],
+        `SELECT name FROM categories WHERE user_id = $1 AND name = $2`,
+        [user_id, new_category],
         (err, results) => {
           if (err) {
             console.log(err);
           } else {
-            //新規カテゴリーID
-            category_id = results.rows[0].id;
-            insertBookmarks();
+            if (results.rows.length == 0) {
+              pool.query(
+                `INSERT INTO categories (user_id, name,created_at,updated_at)
+                VALUES ($1, $2, $3, $4)
+                RETURNING id`,
+                [user_id, new_category, created_at, updated_at],
+                (err, results) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    //新規カテゴリーID
+                    category_id = results.rows[0].id; //数値
+                    console.log(category_id);
+                    insertBookmarks();
+                  }
+                }
+              )
+            } else {
+              res.redirect('/');
+            }
           }
         }
       )
@@ -61,10 +79,12 @@ module.exports = (async (req, res) => {
 
     //bookmarksテーブルにデータ格納
     function insertBookmarks() {
+      let created_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
+      let updated_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
       pool.query(
-        `INSERT INTO bookmarks (user_id,category_id,title, url, text)
-                VALUES ($1,$2, $3, $4, $5)`,
-        [userid, category_id, url_title, url, text_memo],
+        `INSERT INTO bookmarks (user_id,category_id,title, url, text,created_at,updated_at)
+                VALUES ($1,$2, $3, $4, $5,$6, $7)`,
+        [user_id, category_id, url_title, url, text_memo, created_at, updated_at],
         (err, results) => {
           if (err) {
             throw err;
