@@ -23,7 +23,7 @@ module.exports = (async (req, res) => {
   }
 
 
-  /**s
+  /**
    * バリデーション
    */
   //URL
@@ -59,10 +59,6 @@ module.exports = (async (req, res) => {
       let created_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
       let updated_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
       pool.query(
-        // `INSERT INTO categories (user_id, name,created_at,updated_at)
-        //         VALUES ($1, $2, $3, $4)
-        //         RETURNING id`,
-        // [user_id, new_category, created_at, updated_at],
         `SELECT name FROM categories WHERE user_id = $1 AND name = $2`,
         [user_id, new_category],
         (err, results) => {

@@ -51,7 +51,7 @@ app.use('/bookmark', bookmarkRouter);
 app.use('/category', categoryRouter);
 
 //ホーム画面（プロジェクト詳細）
-app.get('/', async function (req, res) {
+app.get('/', secure.isAuthenticated, async function (req, res) {
   //req.isAuthenticated();
   const index = require('./models/index');
   await index(req, res);
