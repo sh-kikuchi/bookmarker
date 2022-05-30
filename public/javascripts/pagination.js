@@ -12,7 +12,7 @@ const total_el = document.querySelector('.total_counter');
 const page_counter = document.querySelector('.page_counter');
 const prev_btn = document.querySelector('.prev');
 const next_btn = document.querySelector('.next');
-const count = 1;
+const count = 5;
 
 // グローバル変数
 let current_step;
@@ -22,7 +22,7 @@ let index_end;
 // ページ数を算出
 function split_page(current_step_update) {
   total_step = Math.ceil(redraw_elements.length / count);
-  if (current_step_update === undefined || current_step === 1) {
+  if (current_step_update === undefined || total_step == 1) {
     current_step = 1;
     next_btn_disable(); prev_btn_active();
   } else if (current_step_update === total_step) {
