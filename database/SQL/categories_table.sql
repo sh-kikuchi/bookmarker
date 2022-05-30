@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS public.categories
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     CONSTRAINT categories_pkey PRIMARY KEY (id)
-    UNIQUE(name)
 )
 
 --INSERT INTO categories(user_id,name) VALUES(1,'ポートフォリオ');

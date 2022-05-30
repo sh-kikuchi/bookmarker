@@ -36,9 +36,8 @@ module.exports = (async (req, res) => {
         console.log(results.rows);
 
         if (results.rows.length > 0) {
-          return res.render("register", {
-            message: "Email already registered"
-          });
+          errors.push({ message: "メールアドレスが登録済みです" });
+          return res.render("users/register", { errors });
         } else {
           pool.query(
             `INSERT INTO users (name, email, password)
@@ -50,7 +49,7 @@ module.exports = (async (req, res) => {
                 throw err;
               }
               console.log(results.rows);
-              req.flash("success_msg", "You are now registered. Please log in");
+              req.flash("success_msg", "登録に成功しました");
               res.redirect("/users/login");
             }
           );

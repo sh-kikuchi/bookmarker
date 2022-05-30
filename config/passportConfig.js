@@ -27,13 +27,13 @@ function initialize(passport) {
               return done(null, user);
             } else {
               //password is incorrect
-              return done(null, false, { message: "Password is incorrect" });
+              return done(null, false, { message: "パスワードが間違っています" });
             }
           });
         } else {
           // No user
           return done(null, false, {
-            message: "No user with that email address"
+            message: "該当のユーザーが存在しません"
           });
         }
       }
